@@ -85,24 +85,40 @@ INSERT INTO Friends (uid1, uid2, startdate)
 VALUES (00010, 00004, '01-FEB-2015');
 
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (0, 00001, 00004, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
+VALUES (0, 00001, 00001, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (1, 00001, 00004, 'I love my sister', '01-JUN-2015 08:01:00.00');
+VALUES (1, 00001, 00002, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (2, 00004, 00001, 'uhhh', '01-JUN-2015 08:01:15.00');
+VALUES (2, 00001, 00003, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (3, 00008, 00009, 'how are you', '01-JUN-2015 09:01:15.00');
+VALUES (3, 00001, 00004, 'I love my sister', '01-JUN-2015 08:01:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (4, 00008, 00009, 'uhhh dude', '01-JUN-2015 10:01:15.00');
+VALUES (4, 00001, 00005, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (5, 00009, 00008, 'just out of class, you', '01-JUN-2015 11:01:15.00');
+VALUES (5, 00001, 00006, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (6, 00009, 00010, 'he wont stop texting', '01-JUN-2015 12:01:15.00');
+VALUES (6, 00001, 00007, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (7, 00010, 00009, 'just talk to him', '01-JUN-2015 12:10:15.00');
+VALUES (7, 00001, 00008, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (8, 00004, 00003, 'we are going to be best friends', '01-JUN-2015 12:15:15.00');
+VALUES (8, 00001, 00009, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (9, 00003, 00004, 'uhhh', '01-JUN-2015 12:20:15.00');
+VALUES (9, 00001, 00010, 'OMG school is awesome', '01-JUN-2015 08:00:00.00');
 INSERT INTO Comments (cid, poster, recipient, text, posttime)
-VALUES (10, 00003, 00009, 'want to hang out', '01-JUN-2015 12:30:00.00');
+VALUES (10, 00004, 00001, 'uhhh', '01-JUN-2015 08:01:15.00');
+INSERT INTO Comments (cid, poster, recipient, text, posttime)
+VALUES (11, 00008, 00009, 'how are you', '01-JUN-2015 09:01:15.00');
+INSERT INTO Comments (cid, poster, recipient, text, posttime)
+VALUES (12, 00008, 00009, 'uhhh dude', '01-JUN-2015 10:01:15.00');
+INSERT INTO Comments (cid, poster, recipient, text, posttime)
+VALUES (13, 00009, 00008, 'just out of class, you', '01-JUN-2015 11:01:15.00');
+INSERT INTO Comments (cid, poster, recipient, text, posttime)
+VALUES (14, 00009, 00010, 'he wont stop texting', '01-JUN-2015 12:01:15.00');
+INSERT INTO Comments (cid, poster, recipient, text, posttime)
+VALUES (15, 00010, 00009, 'just talk to him', '01-JUN-2015 12:10:15.00');
+INSERT INTO Comments (cid, poster, recipient, text, posttime)
+VALUES (16, 00004, 00003, 'we are going to be best friends', '01-JUN-2015 12:15:15.00');
+INSERT INTO Comments (cid, poster, recipient, text, posttime)
+VALUES (17, 00003, 00004, 'uhhh', '01-JUN-2015 12:20:15.00');
+INSERT INTO Comments (cid, poster, recipient, text, posttime)
+VALUES (18, 00003, 00009, 'want to hang out', '01-JUN-2015 12:30:00.00');
