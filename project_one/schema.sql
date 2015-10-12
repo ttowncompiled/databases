@@ -14,7 +14,7 @@ CREATE TABLE Friends (
 );
 
 CREATE TABLE Comments (
-  comment_id INTEGER PRIMARY KEY,
+  cid INTEGER PRIMARY KEY,
   poster CHARACTER(5) NOT NULL,
   recipient CHARACTER(5) NOT NULL,
   FOREIGN KEY (poster) REFERENCES Users(uid),
