@@ -1,0 +1,96 @@
+-- create schema --
+CREATE TABLE Users (
+  id CHARACTER(5) PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  gender CHARACTER(1) NOT NULL CHECK(gender = 'M' OR gender = 'F')
+);
+
+CREATE TABLE Friends (
+  CONSTRAINT id_1 FOREIGN KEY REFERENCES Users.id,
+  CONSTRAINT id_2 FOREIGN KEY REFERENCES Users.id,
+  startdate DATE,
+  CONSTRAINT f_id PRIMARY KEY(id_1, id_2)
+);
+
+CREATE TABLE Comments (
+  comment_id INTEGER PRIMARY KEY,
+  CONSTRAINT poster FOREIGN KEY REFERENCES Users.id,
+  CONSTRAINT recipient FOREIGN KEY REFERENCES Users.id,
+  text VARCHAR NOT NULL,
+  posttime TIMESTAMP
+);
+
+-- insert values --
+INSERT INTO Users (name, gender)
+VALUES ('John', 'M');
+INSERT INTO Users (name, gender)
+VALUES ('Jane', 'F');
+
+-- query 1 --
+SELECT Comments.id, Comments.poster, Comments.recipient, Comments.text, Comments.posttime
+FROM Comments
+WHERE Comments.text LIKE '%OMG%'
+ORDER BY Comments.poster, Comments.posttime DECR;
+
+-- query 2 --
+SELECT DISTINCT males.id, males.name, males.gender
+FROM Users AS males INNER JOIN Friends AS fr ON males.id = fr.id_1
+                    INNER JOIN Users AS females ON fr.id_2 = females.id
+WHERE males.gender = 'M'
+      AND females.gender = 'F';
+
+-- query 3 --
+SELECT males.id, males.name, males.gender, females.id, females.name, females.gender, fr.startdate
+FROM Users AS males INNER JOIN Friends AS fr ON males.id = fr.id_1
+                    INNER JOIN Users AS females ON fr.id_2 = females.id
+WHERE males.gender = 'M'
+      AND females.gender = 'F'
+      AND '31-DEC-2014' < fr.startdate
+      AND '01-JAN-2016' > fr.startdate;
+
+-- query 4 --
+SELECT Users.id, Users.name, Users.gender, num_female_friends, num_male_friends
+FROM Users INNER JOIN (SELECT female_friends.id_1, female_friends.id_2, COUNT(female_friends.id_2) AS num_female_friends
+                       FROM Friends AS female_friends INNER JOIN Users AS females ON female_friends.id_2 = females.id
+                       WHERE females.gender = 'F'
+                       GROUP BY female_friends.id_1) ON Users.id = female_friends.id_1
+           INNER JOIN (SELECT male_friends.id_1, male_friends.id_2, COUNT(male_friends.id_2) AS num_male_friends
+                       FROM Friends AS male_friends INNER JOIN Users AS males ON male_friends.id_2 = males.id
+                       WHERE males.gender = 'M'
+                       GROUP BY male_friends.id_1) ON female_friends.id_1 = male_friends.id_1;
+
+-- query 5 --
+SELECT Users.id, Users.name, Users.gender
+FROM Users LEFT JOIN (SELECT DISTINCT males.id
+                      FROM Comments INNER JOIN Users AS males ON Comments.recipient = males.id
+                                    INNER JOIN Users AS females ON Comments.poster = females.id
+                      WHERE males.gender = 'M'
+                            AND females.gender = 'F') ON Users.id = males.id
+WHERE Users.gender = 'M'
+      AND males.id IS NULL;
+
+-- query 6 --
+SELECT Users.id, Users.name, Users.gender
+FROM Users INNER JOIN (SELECT DISTINCT Comments.poster
+                       FROM Comments
+                       HAVING COUNT(Comments.poster, Comments.recipient) > 1) ON Users.id = Comments.poster;
+
+-- query 7 --
+SELECT Comments.text, Comments.posttime
+FROM Friends INNER JOIN Comments ON Friends.id_1 = Comments.poster
+WHERE Friends.id_2 = Comments.recipient;
+
+-- query 8 --
+SELECT Users.id, Users.name, Users.gender
+FROM Users LEFT JOIN (SELECT DISTINCT Comments.poster
+                      FROM Comments INNER JOIN Users AS males ON Comments.recipient = males.id
+                      WHERE males.gender = 'M') ON Users.id = Comments.poster
+WHERE Comments.poster IS NULL;
+
+-- query 9 --
+SELECT Users.id, Users.name, Users.gender, comments_received
+FROM Users INNER JOIN (SELECT Comments.recipient, COUNT(Comments.recipient) AS comments_received
+                       FROM Comments
+                       GROUP BY Comments.recipient) ON Users.id = Comments.recipient;
+WHERE comments_received = MAX(comments_received);
+
