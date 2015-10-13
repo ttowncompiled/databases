@@ -2,7 +2,7 @@
 CREATE TABLE Users (
   "uid" CHARACTER(5) PRIMARY KEY,
   "name" VARCHAR(64) NOT NULL,
-  "gender" CHARACTER(1) NOT NULL
+  "gender" CHARACTER(1) NOT NULL CHECK("gender" = 'M' OR "gender" = 'F')
 );
 
 CREATE TABLE Friends (
